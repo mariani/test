@@ -1,4 +1,4 @@
-Piwik on OpenShift is Awesome
+Piwik on OpenShift
 
 Repo layout
 ===========
@@ -62,4 +62,37 @@ the user git pushes.
 Additional information
 ======================
 
-Link to additional information will be here, when we have it :)
+More information can be found on the official Piwik website at http://piwik.org
+
+  Running on OpenShift 
+  ------------------
+
+  Create an account at http://openshift.redhat.com or OpenShift Enterprise installation
+  
+  Create a PHP application
+
+    rhc app create -a piwik -t php-5.3 l $USERNAME
+
+  Add mysql support to your application
+
+    rhc cartridge add -a piwik -c mysql -l $USERNAME
+
+  Make a note of the username, password, and host name as you will need to use these to complete the Piwik installation on OpenShift
+
+
+  Add this upstream Piwik quickstart repo
+
+    cd piwik/php
+    rm -rf *
+    git remote add upstream -m m master git://github.com/gshipley/piwik-openshift-quickstart.git
+    git pull -s recursive -X theirs upstream master
+
+  Then push the repo upstream to OpenShift
+
+    git push
+
+  That's it, you can now checkout your paplication at:
+
+    http://piwik-$yourlogin.rhcloud.com
+
+
